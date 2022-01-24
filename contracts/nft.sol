@@ -53,8 +53,8 @@ contract DumbGuys is ERC721, ERC721URIStorage, Ownable {
     function payToMint(address buyer, string memory metadataURI) 
     public payable returns (uint256) {
         require(existingURIs[metadataURI] != 1,"NFT already minted!");
-        // my nfts are free for all
-        //require(msg.value >= 0.05 ether, "Insufficient balance!");
+        // my nfts are not free for all
+        require(msg.value >= 0.05 ether, "Insufficient balance!");
 
         uint256 newItemId = _tokenIdCounter.current();
         _tokenIdCounter.increment();

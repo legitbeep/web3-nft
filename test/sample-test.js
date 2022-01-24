@@ -13,7 +13,7 @@ describe("nft", function () {
     let balance = await dumbGuys.balanceOf(buyer);
     expect(balance).to.equal(0);
 
-    const newlyMintedToken = await dumbGuys.payToMint(buyer, metadataURI, { value: ethers.utils.parseEther('0.01') })
+    const newlyMintedToken = await dumbGuys.payToMint(buyer, metadataURI, { value: ethers.utils.parseEther('0.05') })
   
     await newlyMintedToken.wait();
     balance = await dumbGuys.balanceOf(buyer);

@@ -6,7 +6,10 @@ import Image from 'next/image'
 import DumbGuys from 'artifacts/contracts/nft.sol/DumbGuys.json';
 import Wallet from './Wallet';
 
+import nft from 'utils/nft'
+
 declare let window:any;
+const NFT: {[key: number]: string} = nft;
 const contractAddress = '';
 const provider = new ethers.providers.Web3Provider(window?.ethereum);
 
@@ -50,9 +53,9 @@ type NFTProps = {
 
 function NFTImage ({tokenId, getCount}: NFTProps) {
     const contentId = process.env.PINATA_ID; // from pinata
-    const metadataURI = `${contentId}/${tokenId}.json`;
-    const imgUri = `https://gateway.pinata.cloud/ipfs/${contentId}/${tokenId}.png`; // mostly broken fix it
-    // const imgUri = `img/${tokenId}.png` // maybe get it locally
+    const metadataURI = `${contentId}/${NFT[tokenId]}.json`;
+    //const imgUri = `https://gateway.pinata.cloud/ipfs/${contentId}/${NFT[tokenId]}.png`; // mostly broken fix it
+    const imgUri = `img/${NFT[tokenId]}.png` // maybe get it locally
 
     const [isMinted, setIsMinted] = useState(false);
 
@@ -79,6 +82,7 @@ function NFTImage ({tokenId, getCount}: NFTProps) {
 
     async function getUri () {
         const uri = await contract.tokenURI(tokenId);
+        alert(uri);
     }
 
     return (
